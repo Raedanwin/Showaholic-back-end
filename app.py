@@ -1,5 +1,6 @@
-from flask import Flask, g
+from flask import Flask, g, jsonify
 from flask_cors import CORS
+from playhouse.shortcuts import model_to_dict
 
 import models
 from resources.watchlist import watchlist
@@ -21,13 +22,13 @@ def after_request(res):
     g.db.close()
     return res
 
+CORS(watchlist, origins='*', supports_credentials=True)
+
+app.register_blueprint(watchlist, url_prefix='/api/v1/watchlist')
+
 @app.route('/')
 def index():
     return 'hi'
-
-CORS(watchlist, origins=['http://localhost:3000'], supports_credentials=True)
-
-app.register_blueprint(watchlist, url_prefix='/api/v1/watchlist')
 
 if __name__ == '__main__':
     models.initialize()

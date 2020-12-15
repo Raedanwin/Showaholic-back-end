@@ -11,6 +11,10 @@ class Watchlist(Model):
     class Meta:
         database = DATABASE
 
+class Show(Model):
+    title = CharField()
+    where_to_watch = CharField()
+
 def initialize():
     DATABASE.connect()
     DATABASE.create_tables([Watchlist], safe=True)
