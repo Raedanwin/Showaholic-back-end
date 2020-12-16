@@ -4,6 +4,7 @@ from playhouse.shortcuts import model_to_dict
 
 import models
 from resources.watchlist import watchlist
+from resources.show import show
 
 DEBUG = True
 PORT = 8000
@@ -23,8 +24,10 @@ def after_request(res):
     return res
 
 CORS(watchlist, origins='*', supports_credentials=True)
+CORS(show, origins='*', supports_credentials=True)
 
 app.register_blueprint(watchlist, url_prefix='/api/v1/watchlist')
+app.register_blueprint(show, url_prefix='/api/v1/show')
 
 @app.route('/')
 def index():
