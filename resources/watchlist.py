@@ -35,12 +35,12 @@ def show(id):
 @watchlist.route('<id>', methods=['PUT'])
 def update(id):
     payload = request.get_json()
-    query = models.Watchlist.update(**payload).where(models.Watchlist.id==id)
+    query = models.Watchlist.update(**payload).where(models.Watchlist.watchlist_id==id)
     query.execute()
     return jsonify(data=model_to_dict(models.Watchlist.get_by_id(id)), status={"code": 200, "message": "Success"})
 
 @watchlist.route('/<id>', methods=["DELETE"])
 def delete(id):
-    query = models.Watchlist.delete().where(models.Watchlist.id==id)
+    query = models.Watchlist.delete().where(models.Watchlist.watchlist_id==id)
     query.execute()
     return jsonify(data="resource successfully deleted", status={"code": 200, "message": "resource successfully deleted"})
