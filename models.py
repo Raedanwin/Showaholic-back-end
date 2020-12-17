@@ -7,6 +7,7 @@ class Watchlist(Model):
     title = CharField()
     authour = CharField()
     watchlist_id = PrimaryKeyField()
+    
     class Meta:
         database = DATABASE
 
